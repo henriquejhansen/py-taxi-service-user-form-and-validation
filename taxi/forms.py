@@ -9,11 +9,11 @@ Driver = get_user_model()
 class DriverForm(UserCreationForm):
     class Meta:
         model = Driver
-        fields = ["username", "password1", "password2", "first_name", "last_name", "license_number"]
+        fields = ["username", "first_name", "last_name", "license_number"]
 
     def clean_license_number(self):
         license = self.cleaned_data["license_number"]
-        if len(license) != 8 or not license[:3].isalpha() or not license[:3].isupper() or not license[3:].isdigit():
+        if len(license) != 8 or not license[:3].isupper() or not license[3:].isdigit():
             raise ValidationError("License must be 3 uppercase letters followed by 5 digits.")
         return license
 
@@ -25,7 +25,7 @@ class DriverLicenseUpdateForm(forms.ModelForm):
 
     def clean_license_number(self):
         license = self.cleaned_data["license_number"]
-        if len(license) != 8 or not license[:3].isalpha() or not license[:3].isupper() or not license[3:].isdigit():
+        if len(license) != 8 or not license[:3].isupper() or not license[3:].isdigit():
             raise ValidationError("License must be 3 uppercase letters followed by 5 digits.")
         return license
 
